@@ -26,5 +26,5 @@ TEST(SoudexTestsuite, zeropadding)
 TEST(SoudexTestsuite, samearray)
 {
   char soundex[5];
-  generateSoundex("Pfister", soundex);
+  generateSoundex("Pfisterl", soundex);
 }

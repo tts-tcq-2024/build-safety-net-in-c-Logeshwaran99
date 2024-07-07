@@ -6,7 +6,7 @@
 #include <string.h>
 
 char getSoundexCode(char c) {
-    c = toupper(c);
+    c =toupper(c);
     switch (c) {
         case 'B': case 'F': case 'P': case 'V': return '1';
         case 'C': case 'G': case 'J': case 'K': case 'Q': case 'S': case 'X': case 'Z': return '2';

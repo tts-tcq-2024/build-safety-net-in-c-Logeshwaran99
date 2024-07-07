@@ -5,7 +5,7 @@ void generateSoundex(const char *name, char *soundex);
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
  //AAA
   char soundex[5];
-  generateSoundex("AX", soundex);
+  generateSoundex("AXL", soundex);
  // ASSERT_EQ(soundex,"A200");
 }
 TEST(SoudexTestsuite, positivecase)
@@ -26,5 +26,5 @@ TEST(SoudexTestsuite, zeropadding)
 TEST(SoudexTestsuite, samearray)
 {
   char soundex[5];
-  generateSoundex("Pfisterl", soundex);
+  generateSoundex("Pfister", soundex);
 }

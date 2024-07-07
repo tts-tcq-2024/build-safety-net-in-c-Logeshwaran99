@@ -33,7 +33,7 @@ char ValueCheck6(char c)
 {
     int row_value = 5;
     int column_value = 1;
-    letter = toupper(c);
+    char letter = toupper(c);
     if (LetterList(letter,row_value,column_value) == 1)
     {
         return '6';
@@ -49,7 +49,7 @@ char ValueCheck5(char c)
 {
     int row_value = 4;
     int column_value = 2;
-    letter = toupper(c);
+    char letter = toupper(c);
     if (LetterList(letter,row_value,column_value) == 1)
     {
         return '5';
@@ -65,7 +65,7 @@ char ValueCheck4(char c)
 {
     int row_value = 3;
     int column_value = 1;
-    letter = toupper(c);
+    char letter = toupper(c);
     if (LetterList(letter,row_value,column_value) == 1)
     {
         return '4';
@@ -81,7 +81,7 @@ char ValueCheck3(char c)
 {
     int row_value = 2;
     int column_value = 2;
-    letter = toupper(c);
+    char letter = toupper(c);
     if (LetterList(letter,row_value,column_value) == 1)
     {
         return '3';
@@ -95,7 +95,7 @@ char ValueCheck2(char c)
 {
     int row_value = 1;
     int column_value = 8;
-    letter = toupper(c);
+    char letter = toupper(c);
     if (LetterList(letter,row_value,column_value) == 1)
     {
         return '2';
@@ -111,7 +111,7 @@ char ValueCheck1(char c)
 {
     int row_value = 0;
     int column_value = 4;
-    letter = toupper(c);
+    char letter = toupper(c);
     if (LetterList(letter,row_value,column_value) == 1)
     {
         return '1';

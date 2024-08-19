@@ -58,7 +58,7 @@ int emptyfunction(const char *name, char *soundex){
 
 // Generate Soundex code from a name
 void generateSoundex(const char *name, char *soundex) {
-    emptyfunction(name,soundex)
+    emptyfunction(name,soundex);
     soundex[0] = toupper(name[0]);
     int sIndex = 1;
 

@@ -42,17 +42,18 @@ char getSoundexCode(char c) {
 
 // Update the Soundex code array based on the new digit
 int updateSoundex(char code, int sIndex, char *soundex) {
-    if (code != '0' && (sIndex == 1 || code != soundex[sIndex - 1])) {
+    int notZero = code != '0';
+    if (notZero) {
         soundex[sIndex] = code;
         return ++sIndex;
-    }
+    } 
+    soundex[sIndex] = soundex[sIndex];
     return sIndex;
 }
 
-int emptyfunction(const char *name, char *soundex){
+void emptyfunction(const char *name, char *soundex){
     if (name == NULL || name[0] == '\0') {
         strcpy(soundex, "0000");
-        return;
     }
 }
 

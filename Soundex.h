@@ -3,6 +3,7 @@
 
 #include <ctype.h>
 #include <string.h>
+#include <stdio.h>
 
 // Get the Soundex code for a given character
 char getSoundexCode(char c) {

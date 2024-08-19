@@ -50,34 +50,25 @@ void padzeros(char* soundex, int sIndex) {
 
 // Update the Soundex code array based on the new digit
 void updateSoundex(char code, char* soundex, int* sIndex, char* previous_code) {
-    // Check if the code is valid and not equal to the previous code
-    if (code != '0') {
-        // Update soundex if different from the previous code
-        if (code != *previous_code) {
-            soundex[(*sIndex)++] = code;
-        }
+    if (code != '0' && code != *previous_code) {
+        soundex[(*sIndex)++] = code;
+        *previous_code = code;
+    } else if (code == '0') {
         *previous_code = code;
     }
 }
 
-// Initialize the Soundex result
-void initializeSoundex(const char* name, char* soundex, int* sIndex, char* previous_code) {
-    soundex[0] = toupper(name[0]);
-    *sIndex = 1;
-    *previous_code = getSoundexCode(name[0]);
-}
-
 // Generate Soundex code from a name
-void generateSoundex(const char *name, char *soundex) {
+void generateSoundex(const char* name, char* soundex) {
     int len = strlen(name);
     if (len == 0) {
         strcpy(soundex, "0000");
         return;
     }
 
-    int sIndex;
-    char previous_code;
-    initializeSoundex(name, soundex, &sIndex, &previous_code);
+    soundex[0] = toupper(name[0]);
+    int sIndex = 1;
+    char previous_code = getSoundexCode(name[0]);
 
     for (int i = 1; i < len && sIndex < 4; ++i) {
         char code = getSoundexCode(name[i]);

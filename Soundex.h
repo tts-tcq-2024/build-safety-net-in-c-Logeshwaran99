@@ -33,7 +33,7 @@ const char SoundexMap[26] = {
     '0'  // Y
 };
 
-// Function to get the Soundex digit for a given character
+// Get the Soundex digit for a given character
 char getSoundexCode(char c) {
     if (isalpha(c)) {
         return SoundexMap[toupper(c) - 'A'];
@@ -41,15 +41,15 @@ char getSoundexCode(char c) {
     return c; // Preserve non-alphabetic characters
 }
 
-// Function to pad Soundex result with zeros if necessary
+// Pad the Soundex result with zeros if necessary
 void padzeros(char* soundex, int sIndex) {
-    while (sIndex < 4) {
-        soundex[sIndex++] = '0';
+    for (; sIndex < 4; ++sIndex) {
+        soundex[sIndex] = '0';
     }
 }
 
-// Function to update the Soundex code array
-void updatesoundex(char code, char* soundex, int* sIndex, char* previous_code) {
+// Update the Soundex code array based on the new digit
+void updateSoundex(char code, char* soundex, int* sIndex, char* previous_code) {
     if (code != '0' && code != *previous_code) {
         soundex[(*sIndex)++] = code;
         *previous_code = code;
@@ -58,23 +58,23 @@ void updatesoundex(char code, char* soundex, int* sIndex, char* previous_code) {
     }
 }
 
-// Function to generate Soundex code from a name
-void generateSoundex(const char *name, char *soundex) {
+// Generate Soundex code from a name
+void generateSoundex(const char* name, char* soundex) {
     int len = strlen(name);
     if (len == 0) {
         strcpy(soundex, "0000");
         return;
     }
-    
+
     soundex[0] = toupper(name[0]);
     int sIndex = 1;
     char previous_code = getSoundexCode(name[0]);
 
-    for (int i = 1; i < len && sIndex < 4; i++) {
+    for (int i = 1; i < len && sIndex < 4; ++i) {
         char code = getSoundexCode(name[i]);
-        updatesoundex(code, soundex, &sIndex, &previous_code);
+        updateSoundex(code, soundex, &sIndex, &previous_code);
     }
-    
+
     padzeros(soundex, sIndex);
     soundex[4] = '\0';
 }

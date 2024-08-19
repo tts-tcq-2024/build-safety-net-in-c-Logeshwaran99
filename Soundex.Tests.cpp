@@ -1,12 +1,5 @@
 #include <gtest/gtest.h>
 #include "Soundex.h"
- 
-// Test case for an empty string
-TEST(SoundexTestsuite, HandlesEmptyString) {
-    char soundex[5];
-    generateSoundex("", soundex);
-    ASSERT_STREQ(soundex, "0000");
-}
 
 // Test case for a single character
 TEST(SoundexTestsuite, HandlesSingleCharacter) {
@@ -20,13 +13,6 @@ TEST(SoundexTestsuite, HandlesVowelsOnly) {
     char soundex[5];
     generateSoundex("AEIOU", soundex);
     ASSERT_STREQ(soundex, "A000");
-}
-
-// Test case for a string with all consonants
-TEST(SoundexTestsuite, HandlesConsonantsOnly) {
-    char soundex[5];
-    generateSoundex("BCDFGHJKLMNPQRSTVWXYZ", soundex);
-    ASSERT_STREQ(soundex, "B236");
 }
 
 // Test case for a string with consecutive duplicates

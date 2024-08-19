@@ -30,6 +30,10 @@ int updateSoundex(char code, int sIndex, char *soundex) {
 
 // Generate Soundex code from a name
 void generateSoundex(const char *name, char *soundex) {
+     if (name[0] == '\0') {
+        strcpy(soundex, "0000");
+        return;
+    }
     soundex[0] = toupper(name[0]);
     int sIndex = 1;
  

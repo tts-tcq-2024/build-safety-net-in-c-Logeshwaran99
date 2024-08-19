@@ -6,44 +6,64 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
  //AAA
   char soundex[5];
   generateSoundex("AXL", soundex);
- // ASSERT_EQ(soundex,"A200");
+  EXPECT_STREQ(soundex,"A200");
 }
 TEST(SoundexTestsuite, BasicInput) {
-    generateSoundex("Robert", "R163");
+    char soundex[5];
+    generateSoundex("Robert", soundex);
+    EXPECT_STREQ(soundex, "R163");
 }
 
 TEST(SoundexTestsuite, InputWithSpecialCharacters) {
-    generateSoundex("O'Connor", "O252");
+    char soundex[5];
+    generateSoundex("O'Connor", soundex);
+    EXPECT_STREQ(soundex, "O252");
 }
 
 TEST(SoundexTestsuite, SingleCharacter) {
-    generateSoundex("A", "A000");
+    char soundex[5];
+    generateSoundex("A", soundex);
+    EXPECT_STREQ(soundex, "A000");
 }
 
 TEST(SoundexTestsuite, MixedCaseInput) {
-    generateSoundex("bOB", "B010");
+    char soundex[5];
+    generateSoundex("bOB", soundex);
+    EXPECT_STREQ(soundex, "B010");
 }
 
 TEST(SoundexTestsuite, EmptyInput) {
-    generateSoundex("", "0000");
+    char soundex[5];
+    generateSoundex("", soundex);
+    EXPECT_STREQ(soundex, "0000");
 }
 
 TEST(SoundexTestsuite, NonAlphabeticCharacters) {
-    generateSoundex("123456", "0000");
+    char soundex[5];
+    generateSoundex("123456", soundex);
+    EXPECT_STREQ(soundex, "0000");
 }
 
 TEST(SoundexTestsuite, AllSameLetters) {
-    generateSoundex("AAAA", "A000");
+    char soundex[5];
+    generateSoundex("AAAA", soundex);
+    EXPECT_STREQ(soundex, "A000");
 }
 
 TEST(SoundexTestsuite, ConsecutiveLettersMappingSameCode) {
-    generateSoundex("BFPV", "B111");
+    char soundex[5];
+    generateSoundex("BFPV", soundex);
+    EXPECT_STREQ(soundex, "B111");
 }
 
 TEST(SoundexTestsuite, FullAlphabetInput) {
-    generateSoundex("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "A123");
+    char soundex[5];
+    generateSoundex("ABCDEFGHIJKLMNOPQRSTUVWXYZ", soundex);
+    EXPECT_STREQ(soundex, "A123");
 }
 
 TEST(SoundexTestsuite, MixedCaseAndSymbols) {
-    generateSoundex("HeLLo_World!", "H450");
+    char soundex[5];
+    generateSoundex("HeLLo_World!", soundex);
+    EXPECT_STREQ(soundex, "H450");
 }

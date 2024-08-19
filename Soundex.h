@@ -60,6 +60,13 @@ void updateSoundex(char code, char* soundex, int* sIndex, char* previous_code) {
     }
 }
 
+// Initialize the Soundex result
+void initializeSoundex(const char* name, char* soundex, int* sIndex, char* previous_code) {
+    soundex[0] = toupper(name[0]);
+    *sIndex = 1;
+    *previous_code = getSoundexCode(name[0]);
+}
+
 // Generate Soundex code from a name
 void generateSoundex(const char *name, char *soundex) {
     int len = strlen(name);

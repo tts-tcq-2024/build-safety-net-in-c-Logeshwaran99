@@ -52,12 +52,6 @@ int updateSoundex(char code, int sIndex, char *soundex) {
     return sIndex;
 }
 
-void emptyfunction(const char *name, char *soundex){
-    if (name == NULL || name[0] == '\0') {
-        strcpy(soundex, "0000");
-    }
-}
-
 // Generate Soundex code from a name
 void generateSoundex(const char *name, char *soundex) {
     emptyfunction(name,soundex);

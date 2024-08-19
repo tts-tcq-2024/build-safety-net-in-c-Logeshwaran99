@@ -8,23 +8,42 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
   generateSoundex("AXL", soundex);
  // ASSERT_EQ(soundex,"A200");
 }
-TEST(SoudexTestsuite, positivecase)
-{
-  char soundex[5];
-  generateSoundex("Robert", soundex);
+TEST(SoundexTestsuite, BasicInput) {
+    generateSoundex("Robert", "R163");
 }
-TEST(SoudexTestsuite, vowelcase)
-{
-  char soundex[5];
-  generateSoundex("Tymczak", soundex);
+
+TEST(SoundexTestsuite, InputWithSpecialCharacters) {
+    generateSoundex("O'Connor", "O252");
 }
-TEST(SoudexTestsuite, zeropadding)
-{
-  char soundex[5];
-  generateSoundex("B", soundex);
+
+TEST(SoundexTestsuite, SingleCharacter) {
+    generateSoundex("A", "A000");
 }
-TEST(SoudexTestsuite, samearray)
-{
-  char soundex[5];
-  generateSoundex("Pfister", soundex);
+
+TEST(SoundexTestsuite, MixedCaseInput) {
+    generateSoundex("bOB", "B010");
+}
+
+TEST(SoundexTestsuite, EmptyInput) {
+    generateSoundex("", "0000");
+}
+
+TEST(SoundexTestsuite, NonAlphabeticCharacters) {
+    generateSoundex("123456", "0000");
+}
+
+TEST(SoundexTestsuite, AllSameLetters) {
+    generateSoundex("AAAA", "A000");
+}
+
+TEST(SoundexTestsuite, ConsecutiveLettersMappingSameCode) {
+    generateSoundex("BFPV", "B111");
+}
+
+TEST(SoundexTestsuite, FullAlphabetInput) {
+    generateSoundex("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "A123");
+}
+
+TEST(SoundexTestsuite, MixedCaseAndSymbols) {
+    generateSoundex("HeLLo_World!", "H450");
 }

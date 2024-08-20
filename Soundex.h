@@ -1,7 +1,6 @@
 #ifndef SOUNDEX_H
 #define SOUNDEX_H
 
-#include "Soundex.h"
 #include <ctype.h>
 #include <string.h>
 
@@ -11,10 +10,7 @@ char getSoundexCode(char c) {
         '5', '0', '1', '2', '6', '2', '3', '0', '1', '0', '2', '0', '2'
     };
     c = toupper(c);
-    if (!isalpha(c)) {
-        return '0';
-    }
-    return soundexTable[c - 'A'];
+    return isalpha(c) ? soundexTable[c - 'A'] : '0';
 }
 
 void initializeSoundex(char *soundex, char firstCharacter) {
@@ -24,13 +20,11 @@ void initializeSoundex(char *soundex, char firstCharacter) {
 }
 
 int shouldAddToSoundex(char code, char *soundex, int sIndex) {
-    // Prevent adding if it's a '0', if sIndex is already at max, or if the code is a duplicate of the previous one
     return sIndex < 4 && code != '0' && code != soundex[sIndex - 1];
 }
 
 void processCharacter(const char *name, char *soundex, int *sIndex, int i) {
     char code = getSoundexCode(name[i]);
-    // Check to ensure the code for the current character is not the same as the code for the first letter
     if (shouldAddToSoundex(code, soundex, *sIndex)) {
         soundex[*sIndex] = code;
         (*sIndex)++;
@@ -38,14 +32,22 @@ void processCharacter(const char *name, char *soundex, int *sIndex, int i) {
 }
 
 void generateSoundex(const char *name, char *soundex) {
-    initializeSoundex(soundex, name[0]);
+    int i = 0;
+    // Skip leading non-alphabetic characters
+    while (name[i] && !isalpha(name[i])) i++;
+
+    if (!name[i]) {
+        initializeSoundex(soundex, '0');
+        return;
+    }
+
+    initializeSoundex(soundex, name[i++]);
+
     int sIndex = 1;
     int len = strlen(name);
-    for (int i = 1; i < len; i++) {
+    for (; i < len; i++) {
         processCharacter(name, soundex, &sIndex, i);
     }
-    // Ensure the Soundex string is null-terminated
-    soundex[sIndex] = '\0';
 }
 
 #endif // SOUNDEX_H

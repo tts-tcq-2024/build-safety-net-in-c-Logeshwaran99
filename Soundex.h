@@ -1,44 +1,47 @@
 #ifndef SOUNDEX_H
 #define SOUNDEX_H
- 
+
+#include "Soundex.h"
 #include <ctype.h>
 #include <string.h>
-#include <stdio.h>
 
-// Get the Soundex code for a given character
 char getSoundexCode(char c) {
-    static const char codeTable[26] = {
-        '0', '1', '2', '3', '0', '1', '2', '0', '0','2', '2', '4', '5', '5', '0', '1', '2', '6',  '2', '3', '0', '1', '0', '2', '0', '2'     
+    static const char soundexTable[26] = {'0', '1', '2', '3', '0', '1', '2', '0', '0', '2', '2', '4', '5','5', '0', '1', '2', '6', '2', '3', '0', '1', '0', '2', '0', '2'
     };
-     c = toupper(c);
-    if (isalpha(c)) {
-        return codeTable[c - 'A'];
+    c = toupper(c);
+    if (!isalpha(c))
+    {      
+         return '0';
     }
-    return '0';
-}  
-
-// Update the Soundex code array based on the new digit
-int updateSoundex(char code, int sIndex, char *soundex) {
-    int notZero = code != '0';
-    if (notZero) {
-        soundex[sIndex] = code;
-        return ++sIndex;
-    } 
-    soundex[sIndex] = soundex[sIndex];
-    return sIndex;
+     return soundexTable[c - 'A'];
 }
 
-// Generate Soundex code from a name
-void generateSoundex(const char *name, char *soundex) {
-    soundex[0] = toupper(name[0]);
-    int sIndex = 1;
- 
-     for (int i = 1; name[i] != '\0' && sIndex <=3; i++) {
-        char code = getSoundexCode(name[i]);
-        sIndex = updateSoundex(code, sIndex, soundex); 
-    }
-    memset(soundex + sIndex, '0', 4 - sIndex);
+void initializeSoundex(char *soundex, char firstCharacter) {
+    soundex[0] = toupper(firstCharacter);
+    soundex[1] = soundex[2] = soundex[3] = '0';
     soundex[4] = '\0';
 }
- 
+
+int shouldAddToSoundex(char code, char *soundex, int sIndex) {
+    return sIndex < 4 && code != '0' && code != soundex[sIndex - 1];
+}
+
+void processCharacter(const char *name, char *soundex, int *sIndex, int i) {
+    char code = getSoundexCode(name[i]);
+    if (shouldAddToSoundex(code, soundex, *sIndex)) {
+        soundex[*sIndex] = code;
+        (*sIndex)++;
+    }
+}
+
+
+void generateSoundex(const char *name, char *soundex) {
+    initializeSoundex(soundex, name[0]);
+    int sIndex = 1;
+    int len = strlen(name);
+    for (int i = 1; i < len; i++) {
+        processCharacter(name, soundex, &sIndex, i);
+    }
+}
+
 #endif // SOUNDEX_H
